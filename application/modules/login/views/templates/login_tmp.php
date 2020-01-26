@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css"
         integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/8cb5e7477f.js" crossorigin="anonymous"></script>
 
 
@@ -94,9 +94,20 @@
 
 <body>
 
+    <nav class="navTemplate fondoBlanco1">
+        <img class="mt-3" src="static/images/logo.png" alt="">
+    </nav>
 
-
-    <?php echo $body; ?>
+    
+   
+    <div class="lineaNav">
+        <div class="w-50 float-left fondoRojo1"></div>
+        <div class="w-50 float-left fondoAzul1"></div>
+    </div>
+    
+    <div class="container">
+        <?php echo $body; ?>
+    </div>
 
 
     <div style="display:none">

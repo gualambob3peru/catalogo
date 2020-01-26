@@ -45,6 +45,40 @@ class Login extends MX_Controller {
         }
     }
 
+    public function login_admin(){
+        //  echo md5(helper_get_semilla()."123456");
+
+        $this->form_validation->set_rules('usuario', 'Usuario', 'trim|required',
+        array(
+            'required' => 'El usuario es requerido'
+        ));
+
+        $this->form_validation->set_rules('contrasena', 'Contraseña', 'trim|required',
+        array(
+            'required' => 'La contraseña es requerida'
+        ));
+        
+        if ($this->form_validation->run($this) == FALSE)
+        {
+            $this->load->tmp_login->setLayout('templates/login_tmp');
+            $this->load->tmp_login->render('login/login_admin.php');
+        }
+        else
+        {
+            $usuario =  $this->input->post('usuario');  
+            $contrasena =  $this->input->post('contrasena');  
+
+            if($this->obj_usuario->validar_usuario($usuario,$contrasena)){
+                redirect('admin');
+            }else{
+                $data['error'] = 'Usuario o contraseña incorrectos';
+                $this->tmp_login->set('error','Usuario o contraseña incorrectos');
+                $this->load->tmp_login->setLayout('templates/login_tmp');
+                $this->load->tmp_login->render('login/login_admin.php');
+            }
+        }
+    }
+
     public function recuperar(){
         $this->form_validation->set_rules('usuario', 'Usuario', 'trim|required');
       

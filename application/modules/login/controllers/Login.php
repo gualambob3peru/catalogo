@@ -46,7 +46,7 @@ class Login extends MX_Controller {
     }
 
     public function login_admin(){
-        //  echo md5(helper_get_semilla()."123456");
+         echo md5(helper_get_semilla()."admin");
 
         $this->form_validation->set_rules('usuario', 'Usuario', 'trim|required',
         array(

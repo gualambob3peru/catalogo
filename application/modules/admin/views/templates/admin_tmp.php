@@ -104,6 +104,27 @@
         <div class="w-50 float-left fondoRojo1"></div>
         <div class="w-50 float-left fondoAzul1"></div>
     </div>
+
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 divhei1 fondoBlanco1 br-10 pt-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <span class="f14 pl-3 colorRojo1 font-weight-bold">ADMINISTRADOR: </span>
+                        <span><?php echo strtoupper($this->session->userdata("nombresCompletos")) ?></span>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <img src="static/images/cerrarSesion.png" alt="" style="height:17px">
+                        <span class="f13 colorRojo1 pr-3">Cerrar sesión</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
     
     <div class="container">
         <?php echo $body; ?>

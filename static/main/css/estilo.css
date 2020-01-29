@@ -7,7 +7,21 @@ html{
     
 }
 
+input[type="text"]{
+    border:1px;
+    border-color:#CDCCCC;
+    border-radius: 6px;
+    height: 30px;
+}
 a:hover{text-decoration: none;}
+
+.tablaSole thead th:first-child{
+    border-radius: 10px 0 0 10px;
+}
+
+.tablaSole thead th:last-child{
+    border-radius: 0 10px 10px 0;
+}
 
 form input{height:36px}
 

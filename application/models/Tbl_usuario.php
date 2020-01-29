@@ -21,7 +21,11 @@ class Tbl_usuario extends CI_Model{
 
     public function get_all(){
         try {
-            $query = $this->db->get($this->tabla);
+            $this->db->from("usuario u");
+            $this->db->select("u.*,tu.descripcion tipo_usuario_desc");
+            $this->db->join("tipo_usuario tu","tu.id=u.idTipo_usuario");
+
+            $query = $this->db->get();
             return $query->result();
         } catch (Exception $exc) {
             return FALSE;

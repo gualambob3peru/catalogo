@@ -117,7 +117,7 @@
                     </div>
                     <div class="col-md-6 text-right">
                         <img src="static/images/cerrarSesion.png" alt="" style="height:17px">
-                        <span class="f13 colorRojo1 pr-3">Cerrar sesión</span>
+                        <a href="admin/logout" class="f13 colorRojo1 pr-3">Cerrar sesión</a>
                     </div>
                 </div>
             </div>

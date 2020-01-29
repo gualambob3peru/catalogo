@@ -18,10 +18,17 @@
             <span class="f13">NOMBRE DE USUARIO</span>
            
             <input class="mt-3 form-control w330 mauto text-center" type="text" name="usuario">
+
+            <br>
+            <span class="f13">CONTRASEÑA</span>
+           
+            <input class="mt-3 form-control w330 mauto text-center" type="password" name="contrasena">
             
             <input type="submit" value=" INICIAR SESIÓN " class="mt-3 mb-3 f13 pl-4 pr-4 boton fondoRojo1 text-white br-20 "> <br>
 
-            <span class="f12">¿Olvidaste tu usuario?</span> <span class="f12 colorRojo1">CLIC AQUÍ</span>
+            
+
+            <span class="f12">¿Olvidaste tu usuario?</span> <a href="login/recuperar" class="f12 colorRojo1">CLIC AQUÍ</a>
 
             <br>
             <br>

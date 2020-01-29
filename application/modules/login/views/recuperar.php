@@ -23,7 +23,7 @@
             <input type="reset" value="LIMPIAR DATOS" class="mt-3 ml-3 mb-3 f13 pl-3 pr-3 boton fondoRojo1 text-white br-20 "> 
             
             <br>
-            <span class="f12">¿Olvidaste tu usuario?</span> <span class="f12 colorRojo1">CLIC AQUÍ</span>
+            <span class="f12">¿Tienes usuario?</span> <a href="login" class="f12 colorRojo1">INICIAR SESIÓN</a>
 
             <br>
             <br>

@@ -35,11 +35,11 @@
 
             <tbody>
                 <?php foreach($usuarios as $key=>$value): ?>
-                    <tr class="fondoBlanco1 mt-2">
+                    <tr class="fondoBlanco1">
                         <td><?php echo $value->id ?></td>
                         <td><img src="static/images/<?php echo $value->foto ?>" alt=""></td>
-                        <td><?php echo $value->nombres ?></td>
-                        <td><?php echo $value->apellidoPaterno." ".$value->apellidoMaterno ?></td>
+                        <td><?php echo strtoupper($value->nombres) ?></td>
+                        <td><?php echo strtoupper($value->apellidoPaterno." ".$value->apellidoMaterno) ?></td>
                         <td><?php echo $value->tipo_usuario_desc ?></td>
                         <td><?php echo $value->nroDocumento ?></td>
                         <td><?php echo $value->email ?></td>

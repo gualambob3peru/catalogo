@@ -9,9 +9,10 @@
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6 divhei1 br-10 pt-3 text-center">
-        <span class="f12 mr-4">NOMBRE DE USUARIO:</span>
-        <input type="text" class="mr-4">
+        <span class="f12 mr-2">NOMBRE DE USUARIO:</span>
+        <input type="text" class="mr-2">
         <button class="boton fondoRojo1 text-white br-20 pl-4 pr-4 pt-2 pb-2 f13">BUSCAR</button>
+        <a href="admin/usuario/nuevoUsuario" class="boton fondoAzul1 text-white br-20 pl-2 pr-2 pt-2 pb-2 f13"><i class="fas fa-plus"></i> Usuario</a>
     </div>
     <div class="col-md-3"></div>
 </div>
@@ -35,9 +36,9 @@
 
             <tbody>
                 <?php foreach($usuarios as $key=>$value): ?>
-                    <tr class="fondoBlanco1">
+                    <tr class="fondoBlanco1 ">
                         <td><?php echo $value->id ?></td>
-                        <td><img src="static/images/<?php echo $value->foto ?>" alt=""></td>
+                        <td><img style="height:38px" src="static/images/usuario/<?php echo $value->foto ?>" onerror="_imgError(this);"></td>
                         <td><?php echo strtoupper($value->nombres) ?></td>
                         <td><?php echo strtoupper($value->apellidoPaterno." ".$value->apellidoMaterno) ?></td>
                         <td><?php echo $value->tipo_usuario_desc ?></td>

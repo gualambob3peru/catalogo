@@ -23,6 +23,20 @@ class Usuario extends MX_Controller {
         $this->load->tmp_admin->setLayout('templates/admin_tmp');
         $this->load->tmp_admin->render('usuario/lista.php');
     }
+
+    public function nuevoUsuario(){ 
+        $this->tmp_admin->set('usuario',$this->session->userdata('usuario'));
+   
+        $this->load->tmp_admin->setLayout('templates/admin_tmp');
+        $this->load->tmp_admin->render('usuario/nuevoUsuario.php');
+    }
+
+    public function nuevoAdministrador(){ 
+        $this->tmp_admin->set('usuario',$this->session->userdata('usuario'));
+
+        $this->load->tmp_admin->setLayout('templates/admin_tmp');
+        $this->load->tmp_admin->render('usuario/nuevoAdministrador.php');
+    }
     
     public function logout(){                     
         $this->session->unset_userdata('logged');

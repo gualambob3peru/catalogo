@@ -7,7 +7,7 @@ html{
     
 }
 
-input[type="text"],input[type="password"]{
+input[type="text"],input[type="password"],input[type="email"],input[type="number"]{
     border:1px #BABABA solid;
     background: white;
     border-radius: 6px;
@@ -36,6 +36,10 @@ a:hover{text-decoration: none;color: inherit;}
     border-radius: 0 15px 15px 0;
 }
 
+.tablaSole td{
+    vertical-align: middle;
+}
+
 form input{height:36px}
 
 .mauto{ margin: 0 auto; }
@@ -44,6 +48,7 @@ form input{height:36px}
 .boton{border:0;display: inline-block;}
 
 .w330{ width:330px }
+.w-35{width:35%}
 
 .navTemplate{text-align: center; height: 97px;}
 .navTemplate img{height: 55px;}

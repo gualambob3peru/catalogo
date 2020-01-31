@@ -46,7 +46,7 @@ class Login extends MX_Controller {
     }
 
     public function login_admin(){
-         echo md5(helper_get_semilla()."admin");
+        // echo md5(helper_get_semilla()."admin");
 
         $this->form_validation->set_rules('usuario', 'Usuario', 'trim|required',
         array(
@@ -83,6 +83,8 @@ class Login extends MX_Controller {
         $this->form_validation->set_rules('usuario', 'Usuario', 'trim|required');
       
         $this->form_validation->set_message('required', 'Este campo es requerido');
+
+        $this->tmp_login->set('error','');
         
         if ($this->form_validation->run($this) == FALSE)
         {
@@ -142,6 +144,7 @@ class Login extends MX_Controller {
             $this->obj_usuario->update_campo($data,"usuario",$correo);
         }
     }
+
 
     public function correoExito(){
         $this->load->tmp_login->setLayout('templates/login_tmp');

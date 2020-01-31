@@ -24,6 +24,7 @@ class Tbl_usuario extends CI_Model{
             $this->db->from("usuario u");
             $this->db->select("u.*,tu.descripcion tipo_usuario_desc");
             $this->db->join("tipo_usuario tu","tu.id=u.idTipo_usuario");
+            $this->db->order_by("fechaRegistro","desc");
 
             $query = $this->db->get();
             return $query->result();

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6 divhei1 br-10 fondoAzul1 text-center text-white pt-3">
-        <span class="font-600">NUEVO ADMINISTRADOR</span>
+        <span class="font-600">NUEVO TÉCNICO</span>
     </div>
     <div class="col-md-3"></div>
 </div>

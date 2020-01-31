@@ -12,6 +12,7 @@ input[type="text"],input[type="password"],input[type="email"],input[type="number
     background: white;
     border-radius: 6px;
     height: 36px;
+    text-align: center;
 }
 a:hover{text-decoration: none;color: inherit;}
 

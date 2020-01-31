@@ -17,7 +17,7 @@
             
             <span class="f13">NOMBRE DE USUARIO</span>
            
-            <input class="mt-3 form-control w330 mauto text-center" type="text" name="usuario">
+            <input class="mt-3 form-control w330 mauto text-center" type="email" name="usuario">
 
             <br>
             <span class="f13">CONTRASEÑA</span>

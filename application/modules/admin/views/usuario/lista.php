@@ -43,7 +43,7 @@
                         <td><?php echo strtoupper($value->apellidoPaterno." ".$value->apellidoMaterno) ?></td>
                         <td><?php echo $value->tipo_usuario_desc ?></td>
                         <td><?php echo $value->nroDocumento ?></td>
-                        <td><?php echo $value->email ?></td>
+                        <td><?php echo $value->usuario ?></td>
                         <td>
                             <img src="static/images/lapiz.png" alt="" style="height:16px" class="pr-1">
                             <img src="static/images/tacho.png" alt="" style="height:16px" class="pr-1">

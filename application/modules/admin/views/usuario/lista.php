@@ -1,8 +1,29 @@
 <style>
     .miImagen{cursor:pointer}
+    .dataTables_wrapper .row:first-child {display:none}
 </style>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+
 <script>
     $(function(){
+        let miTabla = $(".tablaSole").DataTable( {
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+            },
+            "lengthChange": false
+            // CON CSS PONEMOS INVISIBLE EL SEARCH
+
+        });
+        
+
+
+        $('#txtBuscar').on( 'keyup', function () {
+            miTabla.search( this.value ).draw();
+        } );
+
         $(".miImagen").click(function(){
             $(".modalImagen").modal();
             $("#fotoModal").attr("src",$(this).attr("src"));
@@ -66,7 +87,7 @@
     <div class="col-md-3"></div>
     <div class="col-md-6 divhei1 br-10 pt-3 text-center">
         <span class="f12 mr-2">NOMBRE DE USUARIO:</span>
-        <input type="text" class="mr-2">
+        <input type="text" class="mr-2" id="txtBuscar">
         <button class="boton fondoRojo1 text-white br-20 pl-4 pr-4 pt-2 pb-2 f13">BUSCAR</button>
         <a href="admin/usuario/nuevoUsuario" class="boton fondoAzul1 text-white br-20 pl-2 pr-2 pt-2 pb-2 f13"><i class="fas fa-plus"></i> Usuario</a>
     </div>

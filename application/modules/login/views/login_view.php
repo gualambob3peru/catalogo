@@ -17,12 +17,12 @@
             <span class="colorRojo1"><?php echo $error ?></span> <br>
             <span class="f13">NOMBRE DE USUARIO</span>
            
-            <input class="mt-3 form-control w330 mauto text-center" type="email" name="usuario">
+            <input class="mt-3 form-control w330 mauto text-center" type="email" name="usuario" required>
 
             <br>
             <span class="f13">CONTRASEÑA</span>
            
-            <input class="mt-3 form-control w330 mauto text-center" type="password" name="contrasena">
+            <input class="mt-3 form-control w330 mauto text-center" type="password" name="contrasena" required>
             
             <input type="submit" value=" INICIAR SESIÓN " class="mt-3 mb-3 f13 pl-4 pr-4 boton fondoRojo1 text-white br-20 "> <br>
 

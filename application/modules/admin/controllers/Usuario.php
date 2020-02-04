@@ -40,6 +40,14 @@ class Usuario extends MX_Controller {
             return false;
     }
 
+    public function nroDocumentoNoRepetido($nroDocumento){
+        $usuario = $this->obj_usuario->get_campo("nroDocumento",$nroDocumento);
+        if($usuario==NULL)
+            return true;
+        else 
+            return false;
+    }
+
     public function nuevoAdministrador(){ 
         $this->tmp_admin->set('usuario',$this->session->userdata('usuario'));
 
@@ -49,7 +57,11 @@ class Usuario extends MX_Controller {
 
         $this->form_validation->set_rules('apellidoMaterno', 'Apellido Materno', 'trim|required');
 
-        $this->form_validation->set_rules('nroDocumento', 'Número de documento', 'trim|required');
+        $this->form_validation->set_rules('nroDocumento', 'Número de documento', 'trim|required|callback_nroDocumentoNoRepetido',
+        array(
+            'required' => 'El Nro de documento es requerido',
+            'nroDocumentoNoRepetido' => 'El Nro de documento ya fue registrado'
+        ));
 
         $this->form_validation->set_rules('usuario', 'Correo electrónico', 'trim|required|callback_usuarioNoRepetido',
         array(
@@ -57,7 +69,11 @@ class Usuario extends MX_Controller {
             'usuarioNoRepetido' => 'Este correo ya está registrado'
         ));
 
-        $this->form_validation->set_rules('contrasena', 'Contraseña', 'trim|required');
+        $this->form_validation->set_rules('contrasena', 'Contraseña', 'trim|required|min_length[6]',
+        array(
+            'required' => 'La contraseña es requerida',
+            'min_length' => 'La contraseña debe tener mínimo 6 caracteres'
+        ));;
 
         $tipoDocumentos = $this->obj_tipoDocumento->get_all();
 
@@ -132,20 +148,26 @@ class Usuario extends MX_Controller {
             'required' => 'El apellido materno es requerido'
         ));
 
-        $this->form_validation->set_rules('nroDocumento', 'Número de documento', 'trim|required',
+        $this->form_validation->set_rules('nroDocumento', 'Número de documento', 'trim|required|callback_nroDocumentoNoRepetido',
         array(
-            'required' => 'El nro de documento es requerido'
+            'required' => 'El Nro de documento es requerido',
+            'nroDocumentoNoRepetido' => 'El Nro de documento ya fue registrado'
         ));
 
-        $this->form_validation->set_rules('usuario', 'Correo electrónico', 'trim|required',
+        $this->form_validation->set_rules('usuario', 'Correo electrónico', 'trim|required|callback_usuarioNoRepetido',
         array(
-            'required' => 'El correo electrónico es requerido'
+            'required' => 'El usuario es requerido',
+            'usuarioNoRepetido' => 'Este correo ya está registrado'
         ));
 
-        $this->form_validation->set_rules('contrasena', 'Contraseña', 'trim|required',
+        $this->form_validation->set_rules('contrasena', 'Contraseña', 'trim|required|min_length[6]',
         array(
-            'required' => 'La contraseña es requerida'
+            'required' => 'La contraseña es requerida',
+            'min_length' => 'La contraseña debe tener mínimo 6 caracteres'
         ));
+
+        $tipoDocumentos = $this->obj_tipoDocumento->get_all();
+        $this->tmp_admin->set('tipoDocumentos',$tipoDocumentos);
         
         if ($this->form_validation->run($this) == FALSE)
         {
@@ -177,6 +199,9 @@ class Usuario extends MX_Controller {
     }
 
     public function editar($id){ 
+        //HALLANDO USUARIO/////////////////
+        $usuario = $this->obj_usuario->get($id);
+        /////////////////////////////////////
         
         $this->tmp_admin->set('usuario',$this->session->userdata('usuario'));
 
@@ -184,12 +209,33 @@ class Usuario extends MX_Controller {
         $this->form_validation->set_rules('apellidoPaterno', 'Apellido Paterno', 'trim|required');
         $this->form_validation->set_rules('apellidoMaterno', 'Apellido Materno', 'trim|required');
         $this->form_validation->set_rules('idTipoDocumento', 'Tipo de Documento', 'trim|required');
-        $this->form_validation->set_rules('nroDocumento', 'Número de documento', 'trim|required');
-        $this->form_validation->set_rules('usuario', 'Correo electrónico', 'trim|required|callback_usuarioNoRepetido',
-        array(
-            'required' => 'El usuario es requerido',
-            'usuarioNoRepetido' => 'Este correo ya está registrado'
-        ));
+
+        if($this->input->post('nroDocumento')!=$usuario->nroDocumento){
+            $this->form_validation->set_rules('nroDocumento', 'Número de documento', 'trim|required|callback_nroDocumentoNoRepetido',
+            array(
+                'required' => 'El Nro de documento es requerido',
+                'nroDocumentoNoRepetido' => 'El Nro de documento ya fue registrado'
+            ));;
+        }
+
+
+        
+
+        if($this->input->post('contrasena')!=""){
+            $this->form_validation->set_rules('contrasena', 'Contraseña', 'trim|required|min_length[6]',
+            array(
+                'required' => 'La contraseña es requerida',
+                'min_length' => 'La contraseña debe tener mínimo 6 caracteres'
+            ));
+        }
+
+        if($this->input->post('usuario')!=$usuario->usuario){
+            $this->form_validation->set_rules('usuario', 'Correo electrónico', 'trim|required|callback_usuarioNoRepetido', array(
+                'required' => 'El usuario es requerido',
+                'usuarioNoRepetido' => 'Este correo ya está registrado'
+            ));
+        }
+
 
         $tipoDocumentos = $this->obj_tipoDocumento->get_all();
 
@@ -197,7 +243,7 @@ class Usuario extends MX_Controller {
         
         if ($this->form_validation->run($this) == FALSE)
         {   
-            $usuario = $this->obj_usuario->get($id);
+            
             $this->tmp_admin->set('usuario',$usuario);
             $this->tmp_admin->set('tipoDocumentos',$tipoDocumentos);
             $this->load->tmp_admin->setLayout('templates/admin_tmp');

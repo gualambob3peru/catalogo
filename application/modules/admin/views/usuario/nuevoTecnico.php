@@ -39,17 +39,33 @@
             </div>
 
             <div>
-                <label id="dni" class="f13">DNI</label>
+                <label for="idTipoDocumento" class="f13">TIPO DE DOCUMENTO</label>
+                <br><?php echo form_error('idTipoDocumento', '<span class="colorRojo1">', '</span>'); ?>
+            </div>
+
+            <div class="mb-3">
+                <select name="idTipoDocumento" id="idTipoDocumento" class="w-75" required >
+                    <option value="">Elegir</option>
+                    <?php foreach($tipoDocumentos as $key=>$value): ?>
+                        <option value="<?php echo $value->id ?>">
+                            <?php echo $value->descripcion ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select> 
+            </div>
+
+            <div>
+                <label for="nroDocumento" class="f13">Nro Documento</label>
                 <br><?php echo form_error('nroDocumento', '<span class="colorRojo1">', '</span>'); ?>
             </div>
 
             <div class="mb-3">
-                <input type="text" name="nroDocumento" id="dni" class="w-75" required value="<?php echo set_value('nroDocumento'); ?>"> 
+                <input type="text" name="nroDocumento" id="nroDocumento" class="w-75" required value="<?php echo set_value('nroDocumento'); ?>"> 
             </div>
 
             <div>
                 <label id="email" class="f13">USUARIO / EMAIL</label>
-                <br><?php echo form_error('nroDocumento', '<span class="colorRojo1">', '</span>'); ?>
+                <br><?php echo form_error('usuario', '<span class="colorRojo1">', '</span>'); ?>
             </div>
 
             <div class="mb-3">

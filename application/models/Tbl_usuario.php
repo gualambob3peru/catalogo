@@ -24,6 +24,7 @@ class Tbl_usuario extends CI_Model{
             $this->db->from("usuario u");
             $this->db->select("u.*,tu.descripcion tipo_usuario_desc");
             $this->db->join("tipo_usuario tu","tu.id=u.idTipo_usuario");
+            $this->db->where("u.idEstados","1");
             $this->db->order_by("fechaRegistro","desc");
 
             $query = $this->db->get();
@@ -66,7 +67,20 @@ class Tbl_usuario extends CI_Model{
         try {
             $this->db->where($campo,$valor);
             $this->db->update($this->tabla, $data);
+            
+            return $this->db->affected_rows();
            
+        } catch (Exception $exc) {
+            return FALSE; 
+        }
+    }
+
+    public function update($data,$id){
+        try {
+            $this->db->where("id",$id);
+            $this->db->update($this->tabla, $data);
+            
+            return $this->db->affected_rows();
            
         } catch (Exception $exc) {
             return FALSE; 
@@ -77,7 +91,7 @@ class Tbl_usuario extends CI_Model{
         try {
             $this->db->insert($this->tabla, $data);
            
-            return $this->db->affected_rows();
+            return $this->db->insert_id();
         } catch (Exception $exc) {
             return FALSE; 
         }

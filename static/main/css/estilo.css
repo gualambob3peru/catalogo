@@ -7,7 +7,9 @@ html{
     
 }
 
-input[type="text"],input[type="password"],input[type="email"],input[type="number"]{
+
+
+input[type="text"],input[type="password"],input[type="email"],input[type="number"],select{
     border:1px #BABABA solid;
     background: white;
     border-radius: 6px;

@@ -23,6 +23,7 @@ class Login extends MX_Controller {
         array(
             'required' => 'La contraseña es requerida'
         ));
+        $this->tmp_login->set('error','');
         
         if ($this->form_validation->run($this) == FALSE)
         {
@@ -79,8 +80,21 @@ class Login extends MX_Controller {
         }
     }
 
+    public function esUsuario($usuario){
+        $usuario = $this->obj_usuario->get_campo("usuario",$usuario);
+        if($usuario==NULL)
+            return false;
+        else 
+            return true;
+       
+    }
+
     public function recuperar(){
-        $this->form_validation->set_rules('usuario', 'Usuario', 'trim|required');
+        $this->form_validation->set_rules('usuario', 'Usuario', 'trim|required|callback_esUsuario',
+        array(
+            'required' => 'El usuario es requerido',
+            'esUsuario' => 'Este correo no esta registrado'
+        ));
       
         $this->form_validation->set_message('required', 'Este campo es requerido');
 

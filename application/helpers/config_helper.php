@@ -61,4 +61,26 @@
 	    }
 	}
 
+	if ( ! function_exists('helper_config_upload')){
+	    function helper_config_upload($ruta){
+			if(!file_exists($ruta)){
+				if(!mkdir($ruta, 0777, true)) {
+					return false;
+				}
+			}
+
+
+			$config['upload_path']          = $ruta;
+			$config['allowed_types']        = 'gif|jpg|png';
+			$config['max_size']             = 1000;
+			$config['max_width']            = 1024;
+			$config['max_height']           = 768;
+			$config['overwrite']            = true;
+			$config['file_name']            = 1;
+
+			return $config;
+
+	    }
+	}
+
 ?>

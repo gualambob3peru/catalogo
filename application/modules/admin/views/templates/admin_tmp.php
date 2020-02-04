@@ -66,11 +66,12 @@
         return $("#_almacen").html();
     }
 
-    let _modalMensaje = function(titulo, texto, boton) {
+    let _modalMensaje = function(titulo, texto, boton,claseBoton="") {
         let miModal = $($("#_divModal").html());
         miModal.find('.modal-title .modal-textT').text(titulo);
         miModal.find('.modal-body p').text(texto);
         miModal.find('.modal-footer button').val(boton);
+        miModal.find('.botonModal').addClass(claseBoton);
         miModal.modal();
     }
 
@@ -160,8 +161,7 @@
                             <p class="">Modal body text goes here.</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="boton" data-dismiss="modal">Aceptar</button>
-
+                            <button type="button" class="botonModal text-white boton br-10 pl-3 pr-3 pt-2 pb-2" data-dismiss="modal">Aceptar</button>
                         </div>
                     </div>
                 </div>

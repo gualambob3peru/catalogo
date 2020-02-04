@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6 divhei1 br-10 fondoAzul1 text-center text-white pt-3">
-        <span class="font-600">NUEVO ADMINISTRADOR</span>
+        <span class="font-600">EDITAR USUARIO</span>
     </div>
     <div class="col-md-3"></div>
 </div>
@@ -26,11 +26,10 @@
             <div>
                 <label for="nombres" class="f13">NOMBRES</label> 
                 <br><?php echo form_error('nombres', '<span class="colorRojo1">', '</span>'); ?>
-               
             </div>
 
             <div class="mb-3">
-                <input type="text" name="nombres" id="nombres" class="w-75" required value="<?php echo set_value('nombres'); ?>"> 
+                <input type="text" name="nombres" id="nombres" class="w-75" required value="<?php echo $usuario->nombres ?>"> 
             </div>
 
             <div>
@@ -39,7 +38,7 @@
             </div>
 
             <div class="mb-3">
-                <input type="text" name="apellidoPaterno" id="apellidoPaterno" class="w-75" required value="<?php echo set_value('apellidoPaterno'); ?>"> 
+                <input type="text" name="apellidoPaterno" id="apellidoPaterno" class="w-75" required value="<?php echo $usuario->apellidoPaterno ?>"> 
             </div>
 
             <div>
@@ -48,19 +47,27 @@
             </div>
 
             <div class="mb-3">
-                <input type="text" name="apellidoMaterno" id="apellidoMaterno" class="w-75" required value="<?php echo set_value('apellidoMaterno'); ?>"> 
+                <input type="text" name="apellidoMaterno" id="apellidoMaterno" class="w-75" required value="<?php echo $usuario->apellidoMaterno ?>"> 
             </div>
 
             <div>
                 <label for="idTipoDocumento" class="f13">TIPO DE DOCUMENTO</label>
                 <br><?php echo form_error('idTipoDocumento', '<span class="colorRojo1">', '</span>'); ?>
             </div>
+            
 
             <div class="mb-3">
-                <select name="idTipoDocumento" id="idTipoDocumento" class="w-75" required >
+                <select name="idTipoDocumento" id="idTipoDocumento" class="w-75" required>
                     <option value="">Elegir</option>
                     <?php foreach($tipoDocumentos as $key=>$value): ?>
-                        <option value="<?php echo $value->id ?>">
+                        <?php
+                            if($value->id == $usuario->idTipoDocumento){
+                                $selected = "selected";
+                            }    else{
+                                $selected = "";
+                            }
+                        ?>
+                        <option <?php echo $selected ?> value="<?php echo $value->id ?>">
                             <?php echo $value->descripcion ?>
                         </option>
                     <?php endforeach; ?>
@@ -73,7 +80,7 @@
             </div>
 
             <div class="mb-3">
-                <input type="text" name="nroDocumento" id="nroDocumento" class="w-75" required value="<?php echo set_value('nroDocumento'); ?>"> 
+                <input type="text" name="nroDocumento" id="nroDocumento" class="w-75" required value="<?php echo $usuario->nroDocumento ?>"> 
             </div>
 
             <div>
@@ -82,7 +89,7 @@
             </div>
 
             <div class="mb-3">
-                <input type="email" name="usuario" id="email" class="w-75" required required value="<?php echo set_value('usuario'); ?>"> 
+                <input type="email" name="usuario" id="email" class="w-75" required value="<?php echo $usuario->usuario ?>"> 
             </div>
 
             <div>
@@ -91,17 +98,17 @@
             </div>
 
             <div class="mb-4">
-                <input type="password" name="contrasena" id="contrasena" class="w-75" required value="<?php echo set_value('contrasena'); ?>"> 
+                <input type="password" name="contrasena" id="contrasena" class="w-75"> 
             </div>
 
             <div class="custom-file w-75 mb-4 mt-2">
-                <input type="file" name="miFile" class="custom-file-input" id="customFile"  lang="es" required>
+                <input type="file" name="miFile" class="custom-file-input" id="customFile"  lang="es" >
                 <label class="custom-file-label" for="customFile">Elegir Archivo</label>
             </div>
 
             
             <div class="mb-5">
-                <button type="submit" class="w-35 boton fondoRojo1 br-20 text-white pl-3 pr-3 pt-1 pb-1 mr-3">CREAR USUARIO</button>
+                <button type="submit" class="w-35 boton fondoRojo1 br-20 text-white pl-3 pr-3 pt-1 pb-1 mr-3">EDITAR</button>
                 <a href="admin/usuario" class="w-35 boton fondoRojo1 br-20 text-white pl-3 pr-3 pt-1 pb-1">REGRESAR</a>
             </div>
         </form>

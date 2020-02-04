@@ -1,3 +1,59 @@
+<style>
+    .miImagen{cursor:pointer}
+</style>
+<script>
+    $(function(){
+        $(".miImagen").click(function(){
+            $(".modalImagen").modal();
+            $("#fotoModal").attr("src",$(this).attr("src"));
+        });
+
+        $(".eliminar").click(function(){
+            let id = $(this).find("img").attr("id_usuario");
+            console.log(id);
+            
+            $("#btnEliminar").attr("id_usuario",id);
+            $(".modalEliminar").modal();
+
+            return false;
+        });
+
+        $("#btnEliminar").click(function(){
+            let $this = $(this);
+
+            $this.prop("disabled",true);
+            let id = $this.attr("id_usuario");
+            console.log(id);
+            
+            $.ajax({
+                url : "admin/usuario/ajaxDelete",
+                type : "post",
+                dataType : "json",
+                data : {
+                    id : id
+                },
+                error : function(a,b){
+                    $this.prop("disabled",false);
+                },
+                success : function(response){
+                    $this.prop("disabled",false);
+                    if(response.respuesta==1){
+                        _modalMensaje("Mensaje", "Usuario Eliminado Correctamente", "Aceptar","fondoAzul1");
+                        $(".modalEliminar").modal("hide");
+                        setTimeout(function(){
+                            location.reload();
+                        },1000);
+                    }else{
+                        _modalMensaje("Mensaje", "No se pudo eliminar el usuario", "Aceptar","fondoRojo1");
+                        $(".modalEliminar").modal("hide");
+                    }
+                    
+                }
+            });
+        });
+    });
+</script>
+
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6 divhei1 br-10 fondoAzul1 text-center text-white pt-3">
@@ -38,15 +94,15 @@
                 <?php foreach($usuarios as $key=>$value): ?>
                     <tr class="fondoBlanco1 ">
                         <td><?php echo $value->id ?></td>
-                        <td><img style="height:38px" src="static/images/usuario/<?php echo $value->foto ?>" onerror="_imgError(this);"></td>
+                        <td><img class="miImagen" style="height:38px" src="static/images/usuario/<?php echo $value->id ?>/<?php echo $value->foto ?>" onerror="_imgError(this);"></td>
                         <td><?php echo strtoupper($value->nombres) ?></td>
                         <td><?php echo strtoupper($value->apellidoPaterno." ".$value->apellidoMaterno) ?></td>
                         <td><?php echo $value->tipo_usuario_desc ?></td>
                         <td><?php echo $value->nroDocumento ?></td>
                         <td><?php echo $value->usuario ?></td>
                         <td>
-                            <img src="static/images/lapiz.png" alt="" style="height:16px" class="pr-1">
-                            <img src="static/images/tacho.png" alt="" style="height:16px" class="pr-1">
+                            <a href="admin/usuario/editar/<?php echo $value->id ?>" class="editar"><img id_usuario="<?php echo $value->id ?>" src="static/images/lapiz.png" style="height:16px" class="pr-1"></a>  
+                            <a href="#" class="eliminar"><img id_usuario="<?php echo $value->id ?>" src="static/images/tacho.png" style="height:16px" class="pr-1"></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -54,4 +110,45 @@
         </table>
     </div>
     
+</div>
+
+
+<div class="modal modalImagen" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Foto de Usuario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <img id="fotoModal" src="" class="img-fluid" alt="Foto de usuario">
+        </div>
+        <div class="modal-footer">
+           
+            <button type="button" class="fondoAzul1 text-white boton br-10 pl-3 pr-3 pt-2 pb-2" data-dismiss="modal">Aceptar</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modalEliminar" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Eliminar Usuario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            ¿Esta seguro que desea eliminar el usuario?
+        </div>
+        <div class="modal-footer">
+            <button id="btnEliminar" type="button" class="fondoAzul1 text-white boton br-10 pl-3 pr-3 pt-2 pb-2">Aceptar</button>
+            <button type="button" class="fondoRojo1 text-white boton br-10 pl-3 pr-3 pt-2 pb-2" data-dismiss="modal">Cancelar</button>
+        </div>
+        </div>
+    </div>
 </div>

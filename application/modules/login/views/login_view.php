@@ -14,7 +14,7 @@
     <div class="row mt-2 h-auto ">
         <div class="col-md-3"></div>
         <div class="col-md-6 fondoBlanco1 text-center br-10 pt-3">
-            
+            <span class="colorRojo1"><?php echo $error ?></span> <br>
             <span class="f13">NOMBRE DE USUARIO</span>
            
             <input class="mt-3 form-control w330 mauto text-center" type="email" name="usuario">

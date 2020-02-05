@@ -76,15 +76,15 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'catalogo',
+	// 'hostname' => 'localhost',
+	// 'username' => 'root',
+	// 'password' => '',
+	// 'database' => 'catalogo',
 
-	// 'hostname' => 'b3creativa.com',   
-	// 'username' => 'bcreativ_sole',
-	// 'password' => 'B3sole123456',
-	// 'database' => 'bcreativ_catalogo',
+	'hostname' => 'b3creativa.com',   
+	'username' => 'bcreativ_sole',
+	'password' => 'B3sole123456',
+	'database' => 'bcreativ_catalogo',
 
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

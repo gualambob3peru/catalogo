@@ -6,47 +6,29 @@
     <div class="col-md-3"></div>
 </div>
 
+<?php foreach($tn as $key=>$value): ?>
 <div class="row mt-2">
     <div class="col-md-3"></div>
     <div class="col-md-6 divhei1 fondoBlanco1 br-10 pt-3 text-center h-auto">
         <div class="fondoBlanco1">
-            <table class="table table-borderless">
-                <tr>
-                    <td style="width:140px" class="f13 font-weight-bold">ADMINISTRADOR:</td>
-                    <td>   
-                        <div class="f17 pl-2 pr-2" style="background:#2195DB;border-radius:10px;color:white">victor.mendoza@sole.com.pe</div>
-                    </td>
-                    <td>
-                        <img class="pr-3" style="height:25px" src="static/images/lapiz.png" alt="">
-                    </td>
-                </tr>
-            </table>
+            <div class="row pb-3 pt-2">
+                <div class="col-md-4 f13 font-weight-bold">
+                    <?php echo $value->descripcion ?>
+                </div>
+                <div class="col-md-6">
+                    <div class="f17 pl-2 pr-2" style="background:#2195DB;border-radius:10px;color:white"><?php echo $value->email ?></div>
+                </div>
+                <div class="col-md-2">
+                    <a href="admin/usuario/agregaNoti/<?php echo $value->id  ?>"><img class="pr-3" style="height:25px" src="static/images/lapiz.png" alt=""></a>
+                </div>
+            </div>
+          
         </div>
 
 
     </div>
     <div class="col-md-3"></div>
 </div>
+<?php endforeach; ?>
 
-<div class="row mt-2">
-    <div class="col-md-3"></div>
-    <div class="col-md-6 divhei1 fondoBlanco1 br-10 pt-3 text-center h-auto">
-        <div class="fondoBlanco1">
-            <table class="table table-borderless">
-                <tr>
-                    <td style="width:140px" class="f13 font-weight-bold">SUPERVISOR:</td>
-                    <td>   
-                        <div class="f17 pl-2 pr-2" style="background:#2195DB;border-radius:10px;color:white">javier.vidal@sole.com.pe</div>
-                    </td>
-                    <td>
-                        <img class="pr-3" style="height:25px" src="static/images/lapiz.png" alt="">
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-
-    </div>
-    <div class="col-md-3"></div>
-</div>
 

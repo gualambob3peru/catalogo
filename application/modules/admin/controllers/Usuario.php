@@ -6,6 +6,7 @@ class Usuario extends MX_Controller {
 
 
         $this->load->model('Tbl_usuario','obj_usuario');    
+        $this->load->model('Tbl_usuario_notificacion','obj_usuario_notificacion');    
         $this->load->model('Tbl_tipoDocumento','obj_tipoDocumento');    
         
        
@@ -292,9 +293,40 @@ class Usuario extends MX_Controller {
 
     
 
-    public function administraNotificacion(){                     
+    public function administraNotificacion(){     
+        $un_all = $this->obj_usuario_notificacion->get_all();
+        $tn = $this->obj_usuario_notificacion->get_all_tn();
+        
+        
+        foreach ($tn as $key => $value) {
+            $usuarioun =  $this->obj_usuario_notificacion->get_row_tipo($value->id);
+            if($usuarioun==NULL) $usuarioun="";
+            else $usuarioun=$usuarioun->email;
+
+            
+            $tn[$key]->email = $usuarioun;
+        }
+        
+     
+
+        
+      
+      
+        $this->tmp_admin->set('tn',$tn);
         $this->load->tmp_admin->setLayout('templates/admin_tmp');
         $this->load->tmp_admin->render('usuario/administraNotificacion.php');
+    }
+
+    public function agregaNoti($tn="1"){   
+        $tipo = $this->obj_usuario_notificacion->get_tn($tn);
+
+        $correos = $this->obj_usuario_notificacion->get_all_tipo($tn);
+        
+
+        $this->tmp_admin->set('tipo',$tipo);
+        $this->tmp_admin->set('correos',$correos);
+        $this->load->tmp_admin->setLayout('templates/admin_tmp');
+        $this->load->tmp_admin->render('usuario/agregaNoti.php');
     }
 
     public function ajaxDelete(){   

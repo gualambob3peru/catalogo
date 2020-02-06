@@ -293,7 +293,7 @@ class Usuario extends MX_Controller {
 
     
 
-    public function administraNotificacion(){     
+    public function administraNotificacion(){    
         $un_all = $this->obj_usuario_notificacion->get_all();
         $tn = $this->obj_usuario_notificacion->get_all_tn();
         
@@ -306,18 +306,38 @@ class Usuario extends MX_Controller {
             
             $tn[$key]->email = $usuarioun;
         }
-        
-     
-
-        
-      
-      
+    
         $this->tmp_admin->set('tn',$tn);
         $this->load->tmp_admin->setLayout('templates/admin_tmp');
         $this->load->tmp_admin->render('usuario/administraNotificacion.php');
     }
 
+    public function existeCorreoNoti($correo){
+        $usuario = $this->obj_usuario_notificacion->get_campo("email",$correo);
+        if($usuario==NULL)
+            return true;
+        else 
+            return false;
+    }
+
     public function agregaNoti($tn="1"){   
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|callback_existeCorreoNoti', array(
+            'required' => 'El Correo es requerido',
+            'existeCorreoNoti' => 'No se puede agregar un correo ya registrado'
+        ));
+
+        if ($this->form_validation->run($this) == FALSE)
+        {   
+            
+            
+        }
+        else
+        {
+            $data["email"] = $this->input->post("email");
+            $data["id_tipo_notificacion"] = $tn;
+            $this->obj_usuario_notificacion->insert($data);
+        }
+
         $tipo = $this->obj_usuario_notificacion->get_tn($tn);
 
         $correos = $this->obj_usuario_notificacion->get_all_tipo($tn);
@@ -349,6 +369,18 @@ class Usuario extends MX_Controller {
             return true;
         }else{
             return false;
+        }
+    }
+
+    public function eliminarCorreo($id){   
+        $tipo_notificacion = $this->obj_usuario_notificacion->get($id);
+        
+        $data = array();
+        $data["idEstados"] = 0;               
+        if($this->obj_usuario_notificacion->update_campo($data,"id",$id)){
+            redirect("admin/usuario/agregaNoti/".$tipo_notificacion->id_tipo_notificacion);
+        }else{
+            redirect("admin/usuario/agregaNoti/".$tipo_notificacion->id_tipo_notificacion);
         }
     }
     

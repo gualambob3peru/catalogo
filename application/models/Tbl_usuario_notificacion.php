@@ -66,6 +66,7 @@ class Tbl_usuario_notificacion extends CI_Model{
     public function get_all_tipo($tipo){
         try {
             $this->db->where("id_tipo_notificacion",$tipo);
+            $this->db->where("idEstados","1");
             $query = $this->db->get($this->tabla);
             return $query->result();
         } catch (Exception $exc) {
@@ -78,6 +79,7 @@ class Tbl_usuario_notificacion extends CI_Model{
     public function get_campo($campo,$valor){
         try {
             $this->db->where($campo,$valor);
+            $this->db->where("idEstados","1");
             $query = $this->db->get($this->tabla);
             return $query->row();
         } catch (Exception $exc) {

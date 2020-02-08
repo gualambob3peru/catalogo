@@ -1,9 +1,7 @@
 <?php
 
-class Tbl_usuario extends CI_Model{
-    private $tabla = 'usuario';
-    private $contrasena = 'contrasena';
-    private $usuario = 'usuario';
+class Tbl_solicitud extends CI_Model{
+    private $tabla = 'solicitud';
 
     public function __construct() {
         parent::__construct();
@@ -21,9 +19,13 @@ class Tbl_usuario extends CI_Model{
 
     public function get_all(){
         try {
-            $this->db->from("usuario u");
-            $this->db->select("u.*,tu.descripcion tipo_usuario_desc");
-            $this->db->join("tipo_usuario tu","tu.id=u.idTipo_usuario");
+            $this->db->from("solicitud s");
+            $this->db->select("s.*,c.nombresCompletos nombresCompletos_cliente,u.nombresCompletos nombresCompletos_usuario,p.descripcion producto_descripcion,es.descripcion estado_solicitud_escripcion,ub.distrito");
+            $this->db->join("usuario u","u.id=s.id_usuario");
+            $this->db->join("cliente c","c.id=s.id_cliente");
+            $this->db->join("producto p","p.id=s.id_producto");
+            $this->db->join("estado_solicitud es","es.id=s.id_estados_solicitud");
+            $this->db->join("ubigeo ub","ub.id=s.id_ubigeo");
             $this->db->where("u.idEstados","1");
             $this->db->order_by("fechaRegistro","desc");
 

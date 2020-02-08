@@ -36,7 +36,15 @@ class Login extends MX_Controller {
             $contrasena =  $this->input->post('contrasena');  
 
             if($this->obj_usuario->validar_usuario($usuario,$contrasena)){
-                redirect('admin');
+               
+
+                if($this->session->userdata("idTipo_usuario")=="1"){
+                    redirect('admin/usuario/menu');
+                }else if(($this->session->userdata("idTipo_usuario")=="2")){
+                    redirect('admin/tecnico');
+                }
+                
+                // redirect('admin');
             }else{
                 $data['error'] = 'Usuario o contraseña incorrectos';
                 $this->tmp_login->set('error','Usuario o contraseña incorrectos');

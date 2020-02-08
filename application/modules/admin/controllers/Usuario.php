@@ -8,6 +8,7 @@ class Usuario extends MX_Controller {
         $this->load->model('Tbl_usuario','obj_usuario');    
         $this->load->model('Tbl_usuario_notificacion','obj_usuario_notificacion');    
         $this->load->model('Tbl_tipoDocumento','obj_tipoDocumento');    
+        $this->load->model('Tbl_solicitud','obj_solicitud');    
         
        
         if($this->session->userdata('logged') != 'true'){
@@ -24,6 +25,15 @@ class Usuario extends MX_Controller {
         $this->tmp_admin->set('usuarios',$usuarios);
         $this->load->tmp_admin->setLayout('templates/admin_tmp');
         $this->load->tmp_admin->render('usuario/lista.php');
+    }
+
+    public function menu(){ 
+        $this->tmp_admin->set('usuario',$this->session->userdata('usuario'));
+        $usuarios = $this->obj_usuario->get_all();
+        
+        $this->tmp_admin->set('usuarios',$usuarios);
+        $this->load->tmp_admin->setLayout('templates/admin_tmp');
+        $this->load->tmp_admin->render('usuario/menu.php');
     }
 
     public function nuevoUsuario(){ 
@@ -381,6 +391,28 @@ class Usuario extends MX_Controller {
             redirect("admin/usuario/agregaNoti/".$tipo_notificacion->id_tipo_notificacion);
         }else{
             redirect("admin/usuario/agregaNoti/".$tipo_notificacion->id_tipo_notificacion);
+        }
+    }
+
+    public function gestionSolicitud(){   
+        $solicitud_all = $this->obj_solicitud->get_all();
+        
+        $this->tmp_admin->set('solicitud_all',$solicitud_all);
+        $this->load->tmp_admin->setLayout('templates/admin_tmp');
+        $this->load->tmp_admin->render('usuario/gestionSolicitud.php');
+    }
+
+    public function ajaxCambioEstadoSolicitud(){
+        if($this->input->is_ajax_request()){
+            $id_solicitud = $this->input->post("id_solicitud");
+            $datos["id_estados_solicitud"] = $this->input->post("id_estados_solicitud");
+           
+            if($this->obj_solicitud->update($datos,$id_solicitud)){
+                echo json_encode(array("respuesta"=>1));
+            }else{
+                echo json_encode(array("respuesta"=>0));
+            }
+
         }
     }
     

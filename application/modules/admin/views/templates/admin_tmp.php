@@ -106,14 +106,15 @@
         <div class="w-50 float-left fondoAzul1"></div>
     </div>
 
-    <br>
+    <br>    
+   
 
     <div class="container">
         <div class="row">
             <div class="col-md-12 divhei1 fondoBlanco1 br-10 pt-3">
                 <div class="row">
                     <div class="col-md-6">
-                        <span class="f14 pl-3 colorRojo1 font-weight-bold">ADMINISTRADOR: </span>
+                        <span class="f14 pl-3 colorRojo1 font-weight-bold"><?php echo $this->session->userdata("descripcion"); ?>: </span>
                         <span><?php echo strtoupper($this->session->userdata("nombresCompletos")) ?></span>
                     </div>
                     <div class="col-md-6 text-right">

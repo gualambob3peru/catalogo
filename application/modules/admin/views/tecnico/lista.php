@@ -50,7 +50,7 @@
         </select>
 
         <button class="boton fondoRojo1 text-white br-20 pl-4 pr-4 pt-2 pb-2 f13">BUSCAR</button>
-        <a href="admin/tecnico/nuevaSolicitud" class="boton fondoRojo1 text-white br-20 pl-2 pr-2 pt-2 pb-2 f13"><i class="fas fa-plus"></i> SOLICITUD</a>
+        <a href="admin/tecnico/elegirProducto" class="boton fondoRojo1 text-white br-20 pl-2 pr-2 pt-2 pb-2 f13"><i class="fas fa-plus"></i> SOLICITUD</a>
     </div>
   
 </div>
@@ -77,7 +77,7 @@
                         <td><?php echo $value->id ?></td>
                         <td><?php echo $value->nombresCompletos_cliente ?></td>
                         <td><?php echo $value->producto_descripcion ?></td>
-                        <td><?php echo $value->estado_solicitud_escripcion ?></td>
+                        <td><?php echo $value->estado_solicitud_descripcion ?></td>
 
                         <td>
                             <a  class="editar"><img id_usuario="<?php echo $value->id ?>" src="static/images/lapiz.png" style="height:16px" class="pr-1"></a>   

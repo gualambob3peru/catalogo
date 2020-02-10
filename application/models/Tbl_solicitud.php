@@ -20,11 +20,11 @@ class Tbl_solicitud extends CI_Model{
     public function get_all(){
         try {
             $this->db->from("solicitud s");
-            $this->db->select("s.*,c.nombresCompletos nombresCompletos_cliente,u.nombresCompletos nombresCompletos_usuario,p.descripcion producto_descripcion,es.descripcion estado_solicitud_escripcion,ub.distrito");
+            $this->db->select("s.*,c.nombresCompletos nombresCompletos_cliente,u.nombresCompletos nombresCompletos_usuario,p.descripcion producto_descripcion,es.descripcion estado_solicitud_descripcion,ub.distrito");
             $this->db->join("usuario u","u.id=s.id_usuario");
             $this->db->join("cliente c","c.id=s.id_cliente");
             $this->db->join("producto p","p.id=s.id_producto");
-            $this->db->join("estado_solicitud es","es.id=s.id_estados_solicitud");
+            $this->db->join("estado_solicitud es","es.id=s.id_estado_solicitud");
             $this->db->join("ubigeo ub","ub.id=s.id_ubigeo");
             $this->db->where("u.idEstados","1");
             $this->db->order_by("fechaRegistro","desc");
@@ -33,6 +33,38 @@ class Tbl_solicitud extends CI_Model{
             return $query->result();
         } catch (Exception $exc) {
             return FALSE;
+        }
+    }
+
+    public function get_all_estado_solicitud(){
+        try {
+            $query = $this->db->get("estado_solicitud");
+            return $query->result();
+        } catch (Exception $exc) {
+            return FALSE; 
+        }
+    }
+    public function where_like($datosWhere,$datosLike){
+        try {
+            $this->db->from("solicitud s");
+            $this->db->select("s.*,c.nombresCompletos nombresCompletos_cliente,u.nombresCompletos nombresCompletos_usuario,p.descripcion producto_descripcion,es.descripcion estado_solicitud_descripcion,ub.distrito");
+            $this->db->join("usuario u","u.id=s.id_usuario");
+            $this->db->join("cliente c","c.id=s.id_cliente");
+            $this->db->join("producto p","p.id=s.id_producto");
+            $this->db->join("estado_solicitud es","es.id=s.id_estado_solicitud");
+            $this->db->join("ubigeo ub","ub.id=s.id_ubigeo");
+            $this->db->where("u.idEstados","1");
+            $this->db->order_by("fechaRegistro","desc");
+
+            if(count($datosWhere)!=0) $this->db->where($datosWhere);
+            if(count($datosLike)!=0) $this->db->like($datosLike);
+
+
+            $query = $this->db->get();
+
+            return $query->result();
+        } catch (Exception $exc) {
+            return FALSE; 
         }
     }
 

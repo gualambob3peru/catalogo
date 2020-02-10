@@ -9,6 +9,7 @@ class Tecnico extends MX_Controller {
         $this->load->model('Tbl_usuario_notificacion','obj_usuario_notificacion');    
         $this->load->model('Tbl_tipoDocumento','obj_tipoDocumento');    
         $this->load->model('Tbl_solicitud','obj_solicitud');    
+        $this->load->model('Tbl_producto','obj_producto');    
         
        
         if($this->session->userdata('logged') != 'true'){
@@ -27,6 +28,16 @@ class Tecnico extends MX_Controller {
         $this->tmp_admin->set('usuarios',$usuarios);
         $this->load->tmp_admin->setLayout('templates/admin_tmp');
         $this->load->tmp_admin->render('tecnico/lista.php');
+    }
+
+    public function elegirProducto(){ 
+        $producto_all = $this->obj_producto->get_all();
+     
+        
+        $this->tmp_admin->set('producto_all',$producto_all);
+
+        $this->load->tmp_admin->setLayout('templates/admin_tmp');
+        $this->load->tmp_admin->render('tecnico/elegirProducto.php');
     }
 
     public function nuevaSolicitud(){ 

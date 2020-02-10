@@ -49,7 +49,7 @@
                 dataType : "json",
                 data : {
                     id_solicitud : id_solicitud,
-                    id_estados_solicitud : opcion 
+                    id_estado_solicitud : opcion 
                 },
                 error : function(ee){
                     console.log(ee);
@@ -82,15 +82,29 @@
     <div class="col-md-3"></div>
 </div>
 
-<div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6 divhei1 br-10 pt-3 text-center">
-        <span class="f12 mr-2">NOMBRE DE USUARIO:</span>
-        <input type="text" class="mr-2" id="txtBuscar">
-        <button class="boton fondoRojo1 text-white br-20 pl-4 pr-4 pt-2 pb-2 f13">BUSCAR</button>
-        <a href="admin/usuario/nuevoUsuario" class="boton fondoAzul1 text-white br-20 pl-2 pr-2 pt-2 pb-2 f13"><i class="fas fa-plus"></i> Usuario</a>
+<div class="row mt-2">
+    <div class="col-md-12">
+        <form class="form-inline f13" method="post" >
+            <label class="my-1 mr-2">FECHA</label>
+            <input type="date" name="fechaInicio">
+            <input type="date" name="fechaFinal">
+
+            <label class="my-1 mr-2 ml-2">SOLICITUD</label>
+            <input type="text" placeholder="SOLICITUD" size="6" name="solicitud">
+            
+            <label class="my-1 mr-2 ml-2">ESTADO</label>
+            <select class="my-1 mr-sm-2" name="id_estado_solicitud">
+                <option value="" selected>ELEGIR...</option>
+                <?php foreach($estado_solicitud_all as $key=>$value): ?>
+                    <option value="<?php echo $value->id ?>"><?php echo $value->descripcion ?></option>
+                <?php endforeach; ?>
+            </select>
+            <input type="text" placeholder="TÉCNICO" size="16" name="tecnico">
+            <input type="text" class="ml-2" placeholder="CLIENTE" size="16" name="cliente">
+
+            <button type="submit" class="boton pl-3 pr-3 pt-2 pb-2 fondoRojo1 ml-2  my-1 br-20 text-white">BUSCAR</button>
+        </form>
     </div>
-    <div class="col-md-3"></div>
 </div>
 
 
@@ -113,13 +127,13 @@
             <tbody>
                 <?php foreach($solicitud_all as $key=>$value): ?>
                     <tr class="fondoBlanco1 ">
-                        <td><?php echo $value->fechaRegistro ?></td>
-                        <td><?php echo $value->fechaEstado ?></td>
+                        <td><?php echo substr($value->fechaRegistro,0,10)  ?></td>
+                        <td><?php echo substr($value->fechaEstado,0,10) ?></td>
                         <td><?php echo $value->id ?></td>
                         <td><?php echo $value->nombresCompletos_usuario ?></td>
                         <td><?php echo $value->nombresCompletos_cliente ?></td>
                         <td><?php echo $value->distrito ?></td>
-                        <td><?php echo $value->estado_solicitud_escripcion ?></td>
+                        <td><?php echo $value->estado_solicitud_descripcion ?></td>
                         
                         <td>
 

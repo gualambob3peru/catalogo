@@ -395,17 +395,56 @@ class Usuario extends MX_Controller {
     }
 
     public function gestionSolicitud(){   
-        $solicitud_all = $this->obj_solicitud->get_all();
+        if($_POST){
         
-        $this->tmp_admin->set('solicitud_all',$solicitud_all);
-        $this->load->tmp_admin->setLayout('templates/admin_tmp');
-        $this->load->tmp_admin->render('usuario/gestionSolicitud.php');
+
+            $datosWhere = array();
+            $datosLike  = array();
+
+            $fechaInicio =          $this->input->post("fechaInicio");
+            $fechaFinal =           $this->input->post("fechaFinal");
+            $solicitud =            $this->input->post("solicitud");
+            $id_estado_solicitud =  $this->input->post("id_estado_solicitud");
+            $tecnico =              $this->input->post("tecnico");
+            $cliente =              $this->input->post("cliente");
+
+
+            if($fechaInicio!="") $datosWhere["s.fechaRegistro >="] = $fechaInicio;
+            if($fechaFinal!="") $datosWhere["s.fechaRegistro <="] = $fechaFinal;
+            if($solicitud!="") $datosWhere["s.id"] = $solicitud;
+            if($id_estado_solicitud!="") $datosWhere["s.id_estado_solicitud"] = $id_estado_solicitud;
+            if($tecnico!="") $datosLike["u.nombresCompletos"] = $tecnico;
+            if($cliente!="") $datosLike["c.nombresCompletos"] = $cliente;
+
+
+            $solicitud_all = $this->obj_solicitud->where_like($datosWhere,$datosLike);
+            $estado_solicitud_all = $this->obj_solicitud->get_all_estado_solicitud();
+           
+            
+            $this->tmp_admin->set('solicitud_all',$solicitud_all);
+            $this->tmp_admin->set('estado_solicitud_all',$estado_solicitud_all);
+            $this->load->tmp_admin->setLayout('templates/admin_tmp');
+            $this->load->tmp_admin->render('usuario/gestionSolicitud.php');
+        }else{
+            $solicitud_all = $this->obj_solicitud->get_all();
+            $estado_solicitud_all = $this->obj_solicitud->get_all_estado_solicitud();
+            
+            
+            
+            $this->tmp_admin->set('solicitud_all',$solicitud_all);
+            $this->tmp_admin->set('estado_solicitud_all',$estado_solicitud_all);
+            $this->load->tmp_admin->setLayout('templates/admin_tmp');
+            $this->load->tmp_admin->render('usuario/gestionSolicitud.php');
+        }
+       
+
     }
 
     public function ajaxCambioEstadoSolicitud(){
         if($this->input->is_ajax_request()){
             $id_solicitud = $this->input->post("id_solicitud");
-            $datos["id_estados_solicitud"] = $this->input->post("id_estados_solicitud");
+            $datos["id_estado_solicitud"] = $this->input->post("id_estado_solicitud");
+            $datos["fechaEstado"] = date("Y-m-d H:i:s");
            
             if($this->obj_solicitud->update($datos,$id_solicitud)){
                 echo json_encode(array("respuesta"=>1));

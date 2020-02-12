@@ -16,15 +16,7 @@
             "lengthChange": false
             // CON CSS PONEMOS INVISIBLE EL SEARCH
 
-        });
-        
-
-
-        
-
-       
-
-       
+        });  
     });
 </script>
 
@@ -37,20 +29,24 @@
 </div>
 
 <div class="row">
-    
-    <div class="col-md-12 divhei1 br-10 pt-3 text-center">
-        <span class="f12 mr-2">FECHA:</span>
-        <input type="date" class="mr-2" id="fechaInicio" name="fechaInicio">
-        <span class="f12 mr-2">HASTA:</span>
-        <input type="date" class="mr-2" id="fechaFin" name="fechaFin">
-        <span class="f12 mr-2">ESTADO</span>
-        <select name="estado" id="estado">
-            <option value="">Elegir</option>
-            <option value="1">APROBADO</option>
-        </select>
+    <div class="col-md-2"></div>
+    <div class="col-md-8 divhei1 br-10 pt-3 text-center">
+        <form class="text-center form-inline f13" method="post" >
+            <label class="my-1 mr-2">FECHA</label>
+            <input type="date" name="fechaInicio">
+            <input type="date" name="fechaFinal">
+            
+            <label class="my-1 mr-2 ml-2">ESTADO</label>
+            <select class="my-1 mr-sm-2" name="id_estado_solicitud">
+                <option value="" selected>ELEGIR...</option>
+                <?php foreach($estado_solicitud_all as $key=>$value): ?>
+                    <option value="<?php echo $value->id ?>"><?php echo $value->descripcion ?></option>
+                <?php endforeach; ?>
+            </select>
 
-        <button class="boton fondoRojo1 text-white br-20 pl-4 pr-4 pt-2 pb-2 f13">BUSCAR</button>
-        <a href="admin/tecnico/elegirProducto" class="boton fondoRojo1 text-white br-20 pl-2 pr-2 pt-2 pb-2 f13"><i class="fas fa-plus"></i> SOLICITUD</a>
+            <button type="submit" class="boton mr-2 pl-3 pr-3 pt-2 pb-2 fondoRojo1 ml-2  my-1 br-20 text-white">BUSCAR</button>
+            <a href="admin/tecnico/elegirProducto" class="boton fondoRojo1 text-white br-20 pl-2 pr-2 pt-2 pb-2 f13"><i class="fas fa-plus"></i> SOLICITUD</a>
+        </form>
     </div>
   
 </div>

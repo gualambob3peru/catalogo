@@ -16,7 +16,7 @@
         
         <a href="admin/usuario/gestionSolicitud" class="w-50 mb-2 pt-2 pb-2  f13 boton fondoRojo1 text-white text-center br-10">GESTIONAR SOLICITUDES</a>
 
-        <a href="" class=" mb-2 w-50 pt-2 pb-2  f13 boton fondoRojo1 text-white text-center br-10">MANTENIMIENTO PRODUCTOS</a>
+        <a href="admin/usuario/elegirProducto" class=" mb-2 w-50 pt-2 pb-2  f13 boton fondoRojo1 text-white text-center br-10">MANTENIMIENTO PRODUCTOS</a>
 
         <a href="admin/usuario/administraNotificacion" class=" mb-2 w-50 pt-2 pb-2  f13 boton fondoRojo1 text-white text-center br-10">CUENTAS PARA NOTIFICACIÓN</a>
 

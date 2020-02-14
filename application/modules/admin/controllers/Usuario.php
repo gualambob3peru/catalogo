@@ -9,6 +9,7 @@ class Usuario extends MX_Controller {
         $this->load->model('Tbl_usuario_notificacion','obj_usuario_notificacion');    
         $this->load->model('Tbl_tipoDocumento','obj_tipoDocumento');    
         $this->load->model('Tbl_solicitud','obj_solicitud');    
+        $this->load->model('Tbl_producto','obj_producto');    
         
        
         if($this->session->userdata('logged') != 'true'){
@@ -357,6 +358,26 @@ class Usuario extends MX_Controller {
         $this->tmp_admin->set('correos',$correos);
         $this->load->tmp_admin->setLayout('templates/admin_tmp');
         $this->load->tmp_admin->render('usuario/agregaNoti.php');
+    }
+
+    public function elegirProducto(){ 
+        $producto_all = $this->obj_producto->get_all();
+     
+        
+        $this->tmp_admin->set('producto_all',$producto_all);
+
+        $this->load->tmp_admin->setLayout('templates/admin_tmp');
+        $this->load->tmp_admin->render('usuario/elegirProducto.php');
+    }
+
+    public function grafica($id_producto){   
+        $producto = $this->obj_producto->get($id_producto);
+        $imagenes = explode(",",$producto->imagen);
+
+        $this->tmp_admin->set('producto',$producto);
+        $this->tmp_admin->set('imagenes',$imagenes);
+        $this->load->tmp_admin->setLayout('templates/grafica_tmp');
+        $this->load->tmp_admin->render('usuario/grafica.php');
     }
 
     public function ajaxDelete(){   

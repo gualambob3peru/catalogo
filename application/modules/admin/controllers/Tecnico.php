@@ -88,21 +88,24 @@ class Tecnico extends MX_Controller {
     }
 
     public function listadoRep(){
-        if($_POST){
+
+        if($_POST && $_POST["orden"] && $_POST["cliente"] && $_POST["garantia"]){
             $this->session->set_userdata("orden",$this->input->post("orden"));
             $this->session->set_userdata("cliente",$this->input->post("cliente"));
             $this->session->set_userdata("garantia",$this->input->post("garantia"));
-
-            $id_producto = $this->session->userdata("id_producto");
-            $producto = $this->obj_producto->get($id_producto);
-
-            $repuesto_all =  $this->obj_repuesto->get_all($id_producto);
-        
-            $this->tmp_admin->set('producto',$producto);
-            $this->tmp_admin->set('repuesto_all',$repuesto_all);
-            $this->load->tmp_admin->setLayout('templates/admin_tmp');
-            $this->load->tmp_admin->render('tecnico/listadoRep.php');
         }
+
+
+        $id_producto = $this->session->userdata("id_producto");
+        $producto = $this->obj_producto->get($id_producto);
+
+        $repuesto_all =  $this->obj_repuesto->get_all($id_producto);
+    
+        $this->tmp_admin->set('producto',$producto);
+        $this->tmp_admin->set('repuesto_all',$repuesto_all);
+        $this->load->tmp_admin->setLayout('templates/admin_tmp');
+        $this->load->tmp_admin->render('tecnico/listadoRep.php');
+        
     }
 
     public function resumenSolicitud(){
@@ -170,7 +173,7 @@ class Tecnico extends MX_Controller {
             $this->obj_repuesto->insert_batch($data);
 
 
-            unset($_SESSION['id_producto']);
+            //unset($_SESSION['id_producto']);
 
 
             $this->tmp_admin->set('id_solicitud',$id_solicitud);

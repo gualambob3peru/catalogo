@@ -10,6 +10,7 @@ class Usuario extends MX_Controller {
         $this->load->model('Tbl_tipoDocumento','obj_tipoDocumento');    
         $this->load->model('Tbl_solicitud','obj_solicitud');    
         $this->load->model('Tbl_producto','obj_producto');    
+        $this->load->model('Tbl_repuesto','obj_repuesto');    
         
        
         if($this->session->userdata('logged') != 'true'){
@@ -372,12 +373,44 @@ class Usuario extends MX_Controller {
 
     public function grafica($id_producto){   
         $producto = $this->obj_producto->get($id_producto);
-        $imagenes = explode(",",$producto->imagen);
+        $imagenes = $this->obj_producto->get_imagen($id_producto);
+        
+        foreach($imagenes as $key => $value){
+            $repuestos = $this->obj_repuesto->get_campo_all("id_imagen",$value->id);
+            $imagenes[$key]->repuesto = $repuestos;
+        }
 
+     
         $this->tmp_admin->set('producto',$producto);
         $this->tmp_admin->set('imagenes',$imagenes);
         $this->load->tmp_admin->setLayout('templates/grafica_tmp');
         $this->load->tmp_admin->render('usuario/grafica.php');
+    }
+
+    public function ajaxAddRepuesto(){   
+        if($this->input->is_ajax_request()){
+            $data["sku"] = $this->input->post("sku");
+            $data["id_imagen"] = $this->input->post("ipi");
+            $data["id_producto"] = $this->input->post("id_producto");
+            $data["descripcion"] = $this->input->post("descripcion");
+            $data["x"] = $this->input->post("x");
+            $data["y"] = $this->input->post("y");
+
+            if($this->insertRepuesto($data)){
+                echo json_encode(array("respuesta" => 1));
+            }else{
+                echo json_encode(array("respuesta" => 0));
+            }   
+        }  
+    }
+
+    public function insertRepuesto($data){     
+
+        if($this->obj_repuesto->insert($data)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public function ajaxDelete(){   

@@ -17,6 +17,7 @@ class Tbl_producto extends CI_Model{
         }
     }
 
+    
     public function get_all(){
         try {
             $this->db->from("producto p");
@@ -32,6 +33,23 @@ class Tbl_producto extends CI_Model{
         }
     }
 
+    public function get_imagen($id_producto){
+        try {
+            $this->db->from("producto_imagen pi");
+            $this->db->select("pi.*");
+  
+            $this->db->where("pi.id_producto",$id_producto);
+            $this->db->where("pi.idEstados","1");
+            $this->db->order_by("pi.fechaRegistro","desc");
+
+            $query = $this->db->get();
+            return $query->result();
+        } catch (Exception $exc) {
+            return FALSE;
+        }
+    }
+
+    
   
   
     public function get_campo($campo,$valor){

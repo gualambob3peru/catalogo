@@ -24,8 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // 
-// $config['base_url'] = 'https://b3creativa.com/catalogo';
-$config['base_url'] = 'http://localhost/catalogo';
+$config['base_url'] = 'https://b3creativa.com/catalogo';
+// $config['base_url'] = 'http://localhost/catalogo';
 
 
 /*

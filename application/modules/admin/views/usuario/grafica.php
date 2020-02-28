@@ -126,7 +126,7 @@
                     <div class="marcoImagen" style="position:relative;overflow-x:auto;overflow-y:auto;max-height:650px" id_producto_imagen="<?php echo $value->id ?>">
 
                     <?php foreach($value->repuesto as $key2=>$value2): ?>
-                        <div class="puntoRep" x="<?php echo $value2->x?>" y="<?php echo $value2->y?>" sku="<?php echo $value2->sku?>" descripcion="<?php echo $value2->descripcion?>" style="top:<?php echo $value2->y ?>;left:<?php echo $value2->x ?>"></div>
+                        <div class="puntoRep" x="<?php echo $value2->x?>" y="<?php echo $value2->y?>" sku="<?php echo $value2->sku?>" descripcion="<?php echo $value2->descripcion?>" style="top:<?php echo $value2->y ?>px;left:<?php echo $value2->x ?>px"></div>
                     <?php endforeach; ?>    
 
                         <img src="static/images/producto/<?php echo $producto->id ?>/<?php echo $value->nombre_archivo ?>">
@@ -150,7 +150,7 @@
             <input type="text" class="form-control" id="sku" aria-describedby="sku">
         </div>
         <div class="form-group">
-            <label for="descripcion">DESCCRIPCION</label>
+            <label for="descripcion">DESCRIPCION</label>
             <input type="text" class="form-control" id="descripcion">
         </div>
         

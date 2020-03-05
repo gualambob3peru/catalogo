@@ -54,6 +54,7 @@ class Tbl_repuesto extends CI_Model{
     public function get_campo_all($campo,$valor){
         try {
             $this->db->where($campo,$valor);
+            $this->db->where("idEstados","1");
             $query = $this->db->get($this->tabla);
             return $query->result();
         } catch (Exception $exc) {

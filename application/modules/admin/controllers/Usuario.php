@@ -396,7 +396,40 @@ class Usuario extends MX_Controller {
             $data["x"] = $this->input->post("x");
             $data["y"] = $this->input->post("y");
 
-            if($this->insertRepuesto($data)){
+            $id_repuesto = $this->insertRepuesto($data);
+
+            if($id_repuesto){
+                echo json_encode(array("respuesta" => 1,"id_repuesto" => $id_repuesto));
+            }else{
+                echo json_encode(array("respuesta" => 0));
+            }   
+        }  
+    }
+
+    public function ajaxUpdateRepuesto(){   
+        if($this->input->is_ajax_request()){
+            $data["sku"] = $this->input->post("sku");
+            $data["descripcion"] = $this->input->post("descripcion");
+           
+
+
+            $num = $this->obj_repuesto->update($data,$this->input->post("id_repuesto"));
+
+            if($num){
+                echo json_encode(array("respuesta" => 1));
+            }else{
+                echo json_encode(array("respuesta" => 0));
+            }   
+        }  
+    }
+
+    public function ajaxRemoveRepuesto(){   
+        if($this->input->is_ajax_request()){
+            $data["idEstados"] = "0";
+      
+            $num = $this->obj_repuesto->update($data,$this->input->post("id_repuesto"));
+
+            if($num){
                 echo json_encode(array("respuesta" => 1));
             }else{
                 echo json_encode(array("respuesta" => 0));
@@ -405,9 +438,9 @@ class Usuario extends MX_Controller {
     }
 
     public function insertRepuesto($data){     
-
-        if($this->obj_repuesto->insert($data)){
-            return true;
+        $id_repuesto = $this->obj_repuesto->insert($data);
+        if($id_repuesto){
+            return $id_repuesto;
         }else{
             return false;
         }

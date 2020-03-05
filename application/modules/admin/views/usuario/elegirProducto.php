@@ -36,7 +36,7 @@
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6 divhei1 br-10 fondoAzul1 text-center text-white pt-3">
-        <a href="admin/tecnico"><i class="text-white fas fa-arrow-left float-left f20 pt-1"></i></a>
+        <a href="admin/usuario/menu "><i class="text-white fas fa-arrow-left float-left f20 pt-1"></i></a>
         <span class="font-600">ELEGIR PRODUCTO</span>
     </div>
     <div class="col-md-3"></div>

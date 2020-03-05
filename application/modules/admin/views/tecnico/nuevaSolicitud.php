@@ -32,9 +32,11 @@
         $(".divRadio").click(function(){
             if(check==1){
                 $(".checkRedondo").css("left","42px");
+                $("#miFile").css("display","none");
                 check=0;
             }else if(check==0){
                 $(".checkRedondo").css("left","3px");
+                $("#miFile").css("display","block");
                 check=1;
             }
             $("#garantia").val(check);
@@ -77,7 +79,7 @@
 <div class="row mt-2">
     <div class="col-md-3"></div>
     <div class="col-md-6 divhei1 br-10 f13 fondoBlanco1 pt-3 pl-5 h-auto">
-        <form action="" method="post" id="miForm">
+        <form action="" method="post" id="miForm"  enctype="multipart/form-data">
             <div class="form-group row">
                 <label for="" class="col-sm-1"></label>
                 <label for="orden" class="col-sm-4 col-form-label">Orden de Servicio</label>
@@ -112,6 +114,20 @@
                 </div>
                 <label for="" class="col-sm-1"></label>
             </div>
+
+            <div class="form-group row">
+                <label for="" class="col-sm-1"></label>
+                
+                <div class="col-sm-10">
+                        <input type="file" name="miFile"  id="miFile">
+                    <div class="custom-file">
+                        <!-- <label class="custom-file-label" for="miFile">Seleccionar Archivo</label> -->
+                    </div>
+                </div>
+                <label for="" class="col-sm-1"></label>
+            </div>
+
+            
 
             <div class="form-group row">
                 <label for="" class="col-sm-1"></label>

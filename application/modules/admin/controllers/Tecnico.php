@@ -88,14 +88,41 @@ class Tecnico extends MX_Controller {
     }
 
     public function listadoRep(){
+        
 
-        if($_POST && $_POST["orden"] && $_POST["cliente"] && $_POST["garantia"]){
+        if($_POST && $_POST["orden"] && $_POST["cliente"]){
             $this->session->set_userdata("orden",$this->input->post("orden"));
             $this->session->set_userdata("cliente",$this->input->post("cliente"));
             $this->session->set_userdata("garantia",$this->input->post("garantia"));
+            
+        }
+
+        
+
+        if($_FILES["miFile"]["name"]==""){
+
+        }else{
+            $nombre = uniqid();
+            $this->session->set_userdata("carpeta",$nombre);
+            
+            $config = helper_config_upload("static/images/usuario/tempo/".$nombre);
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('miFile')){
+                $error = array('error' => $this->upload->display_errors());
+            }
+            else{
+                $data = array('upload_data' => $this->upload->data());
+    
+                // $newDatos = array();
+                // $newDatos["archivo_garantia"] = $data["upload_data"]["file_name"];
+                // $this->obj_solicitud->update_campo($newDatos,"id",$id_solicitud);
+            }
         }
 
 
+        
         $id_producto = $this->session->userdata("id_producto");
         $producto = $this->obj_producto->get($id_producto);
 
@@ -109,6 +136,7 @@ class Tecnico extends MX_Controller {
     }
 
     public function resumenSolicitud(){
+       
         if($_POST){
             $cantidad = $this->input->post("cantidad");
             $check = $this->input->post("check");
@@ -116,13 +144,9 @@ class Tecnico extends MX_Controller {
             $this->session->set_userdata("cantidad",$cantidad);
             $this->session->set_userdata("check",$check);
             $this->session->set_userdata("garantia",$this->input->post("check"));
-          
-          
-
-            $producto = $this->obj_repuesto->get($this->session->userdata("id_producto"));
-
             
-
+            $producto = $this->obj_producto->get($this->session->userdata("id_producto"));
+            
             $repuesto_all = array();
             foreach ($check as $key => $value) {
                 $repuesto = $this->obj_repuesto->get($key);
@@ -143,7 +167,7 @@ class Tecnico extends MX_Controller {
     }
 
     public function enviarSolicitud(){
-
+            
             if($this->session->userdata("id_producto")==""){
                 redirect("admin/tecnico");
             }
@@ -155,8 +179,13 @@ class Tecnico extends MX_Controller {
             $dataSolicitud["id_ubigeo"] = "12451414";
             $dataSolicitud["orden"] = $this->session->userdata("orden");
             $dataSolicitud["cliente"] = $this->session->userdata("cliente");
+            $dataSolicitud["archivo_garantia"] = $this->session->userdata("carpeta");
 
             $id_solicitud = $this->obj_solicitud->insert($dataSolicitud);
+            $this->session->set_userdata("carpeta","");
+          
+            
+
 
             $cantidad = $this->session->userdata("cantidad");
             $check = $this->session->userdata("check");

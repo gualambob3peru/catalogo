@@ -75,7 +75,7 @@
             <?php foreach($producto_all as $key=>$value): ?>
                 <tr class="fondoBlanco1 ">
                     <td><?php echo $value->sku ?></td>
-                    <td><?php echo $value->imagen ?></td>
+                    <td>-</td>
                     <td><?php echo $value->descripcion ?></td>
                     <td><?php echo $value->fichaTecnica ?></td>
                     <td>

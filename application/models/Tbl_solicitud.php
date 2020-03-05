@@ -27,7 +27,7 @@ class Tbl_solicitud extends CI_Model{
             $this->db->join("estado_solicitud es","es.id=s.id_estado_solicitud");
             $this->db->join("ubigeo ub","ub.id=s.id_ubigeo");
             $this->db->where("u.idEstados","1");
-            $this->db->order_by("fechaRegistro","desc");
+            $this->db->order_by("s.fechaRegistro","desc");
 
             $query = $this->db->get();
             return $query->result();
@@ -38,6 +38,7 @@ class Tbl_solicitud extends CI_Model{
 
     public function get_all_estado_solicitud(){
         try {
+           
             $query = $this->db->get("estado_solicitud");
             return $query->result();
         } catch (Exception $exc) {
@@ -54,7 +55,7 @@ class Tbl_solicitud extends CI_Model{
             $this->db->join("estado_solicitud es","es.id=s.id_estado_solicitud");
             $this->db->join("ubigeo ub","ub.id=s.id_ubigeo");
             $this->db->where("u.idEstados","1");
-            $this->db->order_by("fechaRegistro","desc");
+            $this->db->order_by("s.fechaRegistro","desc");
 
             if(count($datosWhere)!=0) $this->db->where($datosWhere);
             if(count($datosLike)!=0) $this->db->like($datosLike);

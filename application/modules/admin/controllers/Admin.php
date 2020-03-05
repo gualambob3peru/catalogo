@@ -16,7 +16,7 @@ class Admin extends MX_Controller {
     }
 	 
 	public function index(){ 
-       
+        
         $this->tmp_admin->set('usuario',$this->session->userdata('usuario'));
         $this->load->tmp_admin->setLayout('templates/admin_tmp');
         $this->load->tmp_admin->render('admin.php');

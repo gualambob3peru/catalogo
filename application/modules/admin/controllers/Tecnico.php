@@ -226,8 +226,10 @@ class Tecnico extends MX_Controller {
         $this->load->tmp_admin->render('tecnico/grafica.php');
     }
 
-    public function enviarSolicitud(){
-            
+    public function enviarSolicitud(){  
+            echo "<pre>";
+            print_r($_SESSION);
+            echo "</pre>";exit;
             if($this->session->userdata("id_producto")==""){
                 redirect("admin/tecnico");
             }

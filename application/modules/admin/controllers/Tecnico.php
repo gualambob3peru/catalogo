@@ -184,7 +184,33 @@ class Tecnico extends MX_Controller {
     }
 
     public function grafica(){   
-        
+        if($_POST && $_POST["orden"] && $_POST["cliente"]){
+            $this->session->set_userdata("orden",$this->input->post("orden"));
+            $this->session->set_userdata("cliente",$this->input->post("cliente"));
+            $this->session->set_userdata("garantia",$this->input->post("garantia"));
+        }
+
+        if($_FILES["miFile"]["name"]==""){
+
+        }else{
+            $nombre = uniqid();
+            $this->session->set_userdata("carpeta",$nombre);
+            
+            $config = helper_config_upload("static/images/usuario/tempo/".$nombre);
+    
+            $this->load->library('upload', $config);
+    
+            if ( ! $this->upload->do_upload('miFile')){
+                $error = array('error' => $this->upload->display_errors());
+            }
+            else{
+                $data = array('upload_data' => $this->upload->data());
+    
+                // $newDatos = array();
+                // $newDatos["archivo_garantia"] = $data["upload_data"]["file_name"];
+                // $this->obj_solicitud->update_campo($newDatos,"id",$id_solicitud);
+            }
+        }
        
         
         $id_producto = $this->session->userdata("id_producto");
@@ -227,9 +253,7 @@ class Tecnico extends MX_Controller {
     }
 
     public function enviarSolicitud(){  
-            echo "<pre>";
-            print_r($_SESSION);
-            echo "</pre>";exit;
+            
             if($this->session->userdata("id_producto")==""){
                 redirect("admin/tecnico");
             }

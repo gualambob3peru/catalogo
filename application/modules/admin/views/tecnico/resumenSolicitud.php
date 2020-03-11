@@ -70,7 +70,7 @@
                     <td><?php echo $value->sku ?></td>
                     <td><?php echo $value->descripcion ?></td>
                     <td><?php echo $value->cantidad ?></td>
-                    <td></td>
+                    <td><?php echo intval($value->stock) ?></td>
                  
                 </tr>
                 <?php endforeach; ?>

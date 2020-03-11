@@ -1,5 +1,32 @@
 <?php 
 
+if ( ! function_exists('helper_ws_stock')){
+	function helper_ws_stock($id_repuesto){
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		  CURLOPT_URL => "http://ts.metusa.com/ServiciosWebPVJ2/WS_BAPI_ECOMMERCE_SOLE.asmx/mDatos_Material_Catalogo_Repuestos",
+		  CURLOPT_RETURNTRANSFER => true,
+		  CURLOPT_ENCODING => "",
+		  CURLOPT_MAXREDIRS => 10,
+		  CURLOPT_TIMEOUT => 0,
+		  CURLOPT_FOLLOWLOCATION => true,
+		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		  CURLOPT_CUSTOMREQUEST => "POST",
+		  CURLOPT_POSTFIELDS =>"{\"pCodigoMaterial\":\"".$id_repuesto."\"}",
+		  CURLOPT_HTTPHEADER => array(
+			"Content-Type: application/json"
+		  ),
+		));
+		
+		$response = curl_exec($curl);
+		
+		curl_close($curl);
+		return $response;
+	}
+
+}
+
 	if ( ! function_exists('helper_get_semilla')){
 	    function helper_get_semilla(){
 	        return '983h4g983g98';

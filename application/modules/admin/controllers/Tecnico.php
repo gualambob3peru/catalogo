@@ -83,6 +83,7 @@ class Tecnico extends MX_Controller {
         
         $this->tmp_admin->set('solicitud_all',$solicitud_all);
         $this->tmp_admin->set('usuarios',$usuarios);
+        $this->tmp_admin->set('id',$id);
         $this->load->tmp_admin->setLayout('templates/admin_tmp');
         $this->load->tmp_admin->render('tecnico/nuevaSolicitud.php');
     }
@@ -136,6 +137,7 @@ class Tecnico extends MX_Controller {
     }
 
     public function resumenSolicitud(){
+
        
         if($_POST){
             $cantidad = $this->input->post("cantidad");
@@ -152,8 +154,23 @@ class Tecnico extends MX_Controller {
                 $repuesto = $this->obj_repuesto->get($key);
                 $repuesto->cantidad = $cantidad[$key];
 
+                $stock = helper_ws_stock($repuesto->sku);
+                $stock = json_decode($stock);
+                $stock = json_decode($stock->d);
+
+                if(count($stock)!=0){
+                    $stock  = $stock[0];
+                    $repuesto->stock = $stock->stock_disponible;
+                    $repuesto->precio = $stock->precio;
+                }else{
+                    $repuesto->stock = "0";
+                    $repuesto->precio = "0";
+                }
+
                 array_push($repuesto_all,$repuesto);
             }
+
+           
 
             $this->tmp_admin->set('orden',$this->session->userdata("orden"));
             $this->tmp_admin->set('cliente',$this->session->userdata("cliente"));
@@ -164,6 +181,49 @@ class Tecnico extends MX_Controller {
             $this->load->tmp_admin->render('tecnico/resumenSolicitud.php');
 
         }
+    }
+
+    public function grafica(){   
+        
+       
+        
+        $id_producto = $this->session->userdata("id_producto");
+        $producto = $this->obj_producto->get($id_producto);
+        $imagenes = $this->obj_producto->get_imagen($id_producto);
+        
+        foreach($imagenes as $key => $value){
+            $repuestos = $this->obj_repuesto->get_campo_all("id_imagen",$value->id);
+
+            foreach ($repuestos as $key2 => $value2) {
+                $stock = helper_ws_stock($value2->sku);
+                $stock = json_decode($stock);
+                $stock = json_decode($stock->d);
+
+                if(count($stock)!=0){
+                    $stock  = $stock[0];
+                    $value2->stock = $stock->stock_disponible;
+                    $value2->precio = $stock->precio;
+                }else{
+                    $value2->stock = "0";
+                    $value2->precio = "0";
+                }
+
+                
+
+                
+            }
+            $imagenes[$key]->repuesto = $repuestos;
+         
+           
+        }
+
+       
+        
+     
+        $this->tmp_admin->set('producto',$producto);
+        $this->tmp_admin->set('imagenes',$imagenes);
+        $this->load->tmp_admin->setLayout('templates/grafica_tmp');
+        $this->load->tmp_admin->render('tecnico/grafica.php');
     }
 
     public function enviarSolicitud(){

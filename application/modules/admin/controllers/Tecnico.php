@@ -257,7 +257,7 @@ class Tecnico extends MX_Controller {
             if($this->session->userdata("id_producto")==""){
                 redirect("admin/tecnico");
             }
-          
+           
             $dataSolicitud["id_usuario"] = $this->session->userdata("id");
             $dataSolicitud["id_cliente"] = 1;
             $dataSolicitud["id_producto"] = $this->session->userdata("id_producto");
